@@ -1,3 +1,10 @@
+# WIP
+
+This is a work in progress, it is not ready for use at this point!
+
+Original gscholar README below.
+
+
 # gscholar
 
 Query Google Scholar using Python.
