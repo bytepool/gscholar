@@ -12,11 +12,11 @@ ACM = "ACM Digital Library"
 
 db = IEEE
 
-AND = "%20AND%20"
-OR = "%20OR%20"
+AND = " AND "
+OR = " OR "
         
 
-def combine_all_terms(terms, operator):
+def construct_queries(terms, operator):
     """
     Combines terms in a given list of lists. You could also think of it as set multiplication. 
 
@@ -27,7 +27,7 @@ def combine_all_terms(terms, operator):
         The operator with which the terms should be linked. E.g., " " or " AND ". 
 
     Example
-        >>> combine_all_terms([['A', 'B'],['C','D'],['E','F']], " ")
+        >>> construct_queries([['A', 'B'],['C','D'],['E','F']], " ")
         ['A C E', 'A C F', 'A D E', 'A D F', 'B C E', 'B C F', 'B D E', 'B D F']
 
     Returns a list of queries.
@@ -60,7 +60,7 @@ def combine_all_terms(terms, operator):
 def __main__():
     """Constructs all possible queries given the input terms."""
 
-    queries = combine_all_terms(data.search_terms, "%20AND%20")
+    queries = construct_queries(data.search_terms, " AND ")
 
     for query in queries:
         print(query)
