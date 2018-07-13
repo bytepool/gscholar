@@ -2,6 +2,7 @@
 A library to parse the json results returned from the IEEE Xplore API.
 """
 
+import re
 import json
 import bibtexparser
 
@@ -23,7 +24,7 @@ def __main__():
 
 def bibtexize(data):
     """
-    Takes the given json data (returned by IEEE Xplore's API), and puts it into a bibtex string.
+    Takes the given json data (from IEEE Xplore's API), and returns a corresponding bibtex string.
     """
     ieee_data = dotdict(data)
     # ieee_data has 3 entries: total_records, total_searched and articles
@@ -57,6 +58,17 @@ def bibtexize(data):
 
     return db
     
+def extract_year(date_string):
+    """
+    Extract a year from the given date string (assuming the year is always 4 digits long).
+    """
+    year_pattern = re.compile(r'\d{4}')
+    year_match = year_pattern.search(date_string)
+    if year_match:
+        return year_match.group()
+    else:
+        return ""
+
 
 def load_journal(entry):
     """
@@ -89,6 +101,11 @@ def load_journal(entry):
         bibdict["keywords"] = (''.join('%s, ' % a for a in keywords))[:-2]
 
     bibdict["pdfurl"] = str(entry.pdf_url)
+
+    year = entry.publication_date
+    if year:
+        bibdict["year"] = extract_year(year)
+        
     return bibdict
 
 
@@ -125,7 +142,13 @@ def load_inproceeding(entry):
         bibdict["keywords"] = (''.join('%s, ' % a for a in keywords))[:-2]
 
     bibdict["pdfurl"] = str(entry.pdf_url)
+
+    year = entry.conference_dates
+    if year:
+        bibdict["year"] = extract_year(year)
+
     return bibdict
+
 
 def load_book(entry):
     """
