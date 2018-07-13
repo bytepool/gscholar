@@ -5,6 +5,7 @@ A library to parse the json results returned from the IEEE Xplore API.
 import json
 import bibtexparser
 
+from utils import dotdict
 UNKNOWN_ARTICLE_TYPE_ERR = 1
 
 def __main__():
@@ -147,12 +148,6 @@ def load_book(entry):
     bibdict["pdfurl"] = str(entry.pdf_url)
     return bibdict
         
-class dotdict(dict):
-    """dot.notation access to dictionary attributes"""
-    __getattr__ = dict.get
-    __setattr__ = dict.__setitem__
-    __delattr__ = dict.__delitem__        
-
     
 if __name__ == "__main__":
     __main__()
