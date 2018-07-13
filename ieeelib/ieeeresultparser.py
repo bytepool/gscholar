@@ -6,7 +6,8 @@ import json
 import bibtexparser
 
 from utils import dotdict
-UNKNOWN_ARTICLE_TYPE_ERR = 1
+from sbqt_errors import *
+
 
 def __main__():
     testfile = "5G_sec.json"
@@ -44,7 +45,7 @@ def bibtexize(data):
             entries.append(bibtex)
         else:
             print("Unknown content type while parsing IEEE data (json). Aborting.", file=sys.stderr)
-            exit(UNKNOWN_ARTICLE_TYPE_ERR)
+            exit(UNKNOWN_ARTICLE_TYPE_ERROR)
 
     db = bibtexparser.bibdatabase.BibDatabase()
     db.entries = entries
