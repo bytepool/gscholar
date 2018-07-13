@@ -22,6 +22,14 @@ def __main__():
     with open("foo.bib", "w") as bf:
         bibtexparser.dump(bibtex_db, bf)
 
+def append_to_bibfile(bibtex_db, filepath):
+    """
+    Append the entries in the given bibtex_db to the given file. 
+    """
+    with open(filepath, "a") as bf:
+        bibtexparser.dump(bibtex_db, bf)
+
+        
 def bibtexize(data):
     """
     Takes the given json data (from IEEE Xplore's API), and returns a corresponding bibtex string.
