@@ -13,7 +13,8 @@ from urllib.request import quote
 
 import ieeelib
 import ieeelib.ieeeresultparser as ieeeparser
-import constructqueries
+import querylib
+
 from utils import dotdict
 from sbqt_errors import *
 
